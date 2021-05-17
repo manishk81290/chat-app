@@ -1,0 +1,44 @@
+<ng-container *ngIf="user">
+    <!-- <div>
+    <figure class="avatar" [ngClass]="{'avatar-state-success':user.online,'avatar-state-danger':!user.online}">
+      <img [src]="user.profileImagePath" class="rounded-circle" />
+    </figure>
+  </div>
+  <div class="users-list-body">
+    <h5>{{ user.firstName + " " + user.lastName }}</h5>
+    <p>{{ user.bio }}</p>
+    <div class="users-list-action action-toggle">
+      <div class="dropdown">
+        <a data-toggle="dropdown">
+          <i class="ti-more"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item">Open</a>
+          <a (click)="viewProfile()" class="dropdown-item"
+            >Profile</a
+          >
+          <a class="dropdown-item">Add to archive</a>
+          <a class="dropdown-item">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+    <div class="col-md-3 col-xs-4 user-img">
+        <img [src]="user.profileImagePath" />
+        <span class="friends-status" [ngClass]="{ available: user.online, busy: !user.online }"></span>
+    </div>
+    <div class="col-md-9 col-xs-8 friend-details">
+        <h4 class="friend-name">
+            {{ user.firstName + " " + user.lastName }}
+        </h4>
+        <p *ngIf="user.lastMessage" class="friend-msg">
+            {{ user.lastMessage.message }}
+        </p>
+        <span *ngIf="user.lastMessage" class="msg-time">{{
+      user.lastMessage.sendDate | timeAgo
+    }}</span>
+    </div>
+    <span *ngIf="user.unreadCount" class="unread-tag">{{ user.unreadCount }} Unread</span
+  >
+</ng-container>

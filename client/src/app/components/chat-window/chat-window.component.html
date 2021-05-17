@@ -1,0 +1,108 @@
+<div class="col-lg-7 col-lg-offset-3 col-md-6 col-md-offset-3 col-xs-12 p-l-r-0 msg-chatbox">
+    <div *ngIf="activeUser" class="col-md-12 col-xs-12 msg-chat-header">
+        <div class="col-md-1 col-xs-3 msg-chatbox-img">
+            <img [src]="activeUser.profileImagePath" />
+            <span class="friends-status busy"></span>
+        </div>
+        <div class="col-md-3 col-xs-5 friend-details">
+            <h4 class="friend-name">
+                {{ activeUser.firstName + " " + activeUser.lastName }}
+            </h4>
+            <ul class="hidden-sm hidden-md hidden-lg">
+                <li>{{ activeUser.online ? "Online" : "Offline" }}</li>
+                <li>
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>Last seen 2 hrs ago
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4 hidden-xs status-details">
+            <ul>
+                <li>{{ activeUser.online ? "Online" : "Offline" }}</li>
+                <li>
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>Last seen 2 hrs ago
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4 col-xs-4 setting-container">
+            <ul class="setting">
+                <li>
+                    <a href="javascript:void(0);" class="privatechat"> </a>
+                </li>
+                <!-- <li>
+                    <a href="javascript:void(0);" class="screenshare"></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="videocall"></a>
+                </li> -->
+                <li>
+                    <a (click)="toggleCall()" class="call"> </a>
+                </li>
+                <li>
+                    <a (click)="viewProfile()" class="settings"> </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div *ngIf="ongoingCall" class="col-md-12 audio-call">
+        <div class="col-md-12">
+            <p>
+                <span class="glyphicon glyphicon-star fav-icon" aria-hidden="true"></span>
+                <span class="caller-name">Garvit Rajput</span> |
+                <span class="call-time">14:28</span>
+            </p>
+        </div>
+        <div class="col-md-12 callers-section">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 callers-list">
+                <div class="col-md-3 caller">
+                    <img src="assets/img/user4.jpg" />
+                </div>
+                <div class="col-md-3 caller">
+                    <img src="assets/img/user5.jpg" />
+                </div>
+                <div class="col-md-3 caller add-caller">
+                    <img src="assets/img/add-call.png" />
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <ul class="call-action">
+                <li>
+                    <a href="javascript:void(0);" class="screenshare"> </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="mute"> </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="disconnect"> </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="chat"> </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-12 msg-container" app-message-list [messages]="chatMessages|message:query"></div>
+
+    <emoji-mart class="emoji-mart" color="#3db16b" [showPreview]="false" [style]="{ position: 'absolute', bottom: '97px', right: '330px' }" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker" title="Pick your emoji…"></emoji-mart>
+    <div class="col-md-12 msgbox-container">
+        <form class="m-0" (submit)="sendMessage()">
+            <div class="col-md-12">
+                <input type="text" class="msgbox" placeholder="Type your message here..." [(ngModel)]="messageText" name="messageText" id="message-input" />
+                <ul class="action-item">
+                    <li>
+                        <a href="javascript:void(0);" class="attachment-icon" #filePicker="ngxFilePicker" ngxFilePicker [filter]="ignoreTooBigFile" (readStart)="onReadStart($event)" (filePick)="onFilePicked($event)" (readEnd)="onReadEnd($event)"></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" (click)="toggleEmojiPicker()" class="smiley-icon"></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" (click)="sendMessage()" class="send-icon"></a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>

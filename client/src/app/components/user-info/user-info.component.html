@@ -1,0 +1,177 @@
+<div
+  id="contact-information"
+  *ngIf="user"
+  class="sidebar"
+  [ngClass]="{ active: opened }"
+>
+  <header>
+    <span>About</span>
+    <ul class="list-inline">
+      <li (click)="closeSidebar()" class="list-inline-item">
+        <a class="btn btn-light sidebar-close">
+          <i class="ti-close"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+  <div class="sidebar-body">
+    <div class="pl-4 pr-4 text-center">
+      <figure
+        [ngClass]="{
+          'avatar-state-success': user.online,
+          'avatar-state-danger': !user.online
+        }"
+        class="avatar avatar-xl mb-4"
+      >
+        <img [src]="user.profileImagePath" class="rounded-circle" />
+      </figure>
+      <h5 class="text-primary">{{ user.firstName + " " + user.lastName }}</h5>
+      <p class="text-muted">{{ user.online ? "Online" : "Offline" }}</p>
+    </div>
+    <hr *ngIf="user.bio" />
+    <div *ngIf="user.bio" class="pl-4 pr-4">
+      <h6>About</h6>
+      <p class="text-muted">
+        {{ user.bio }}
+      </p>
+    </div>
+    <hr *ngIf="user.mobile" />
+    <div *ngIf="user.mobile" class="pl-4 pr-4">
+      <h6>Phone</h6>
+      <p class="text-muted">{{ user.mobile }}</p>
+    </div>
+    <hr *ngIf="user.city || user.state || user.country" />
+    <div *ngIf="user.city || user.state || user.country" class="pl-4 pr-4">
+      <h6>Address</h6>
+      <p class="text-muted">
+        {{
+          user.city ? user.city + (user.state || user.country ? "," : "") : ""
+        }}
+        {{ user.state ? user.state + (user.country ? "," : "") : "" }}
+        {{ user.country ? user.country : "" }}
+      </p>
+    </div>
+    <hr *ngIf="user.website" />
+    <div *ngIf="user.website" class="pl-4 pr-4">
+      <h6>Website</h6>
+      <p>
+        <a [href]="user.website" target="_blank">{{ user.website }}</a>
+      </p>
+    </div>
+    <hr
+      *ngIf="
+        user.dribbleProfileUrl ||
+        user.facebookProfileUrl ||
+        user.googlePlusProfileUrl ||
+        user.instagramProfileUrl ||
+        user.linkedInProfileUrl ||
+        user.twitterProfileUrl
+      "
+    />
+    <div
+      *ngIf="
+        user.dribbleProfileUrl ||
+        user.facebookProfileUrl ||
+        user.googlePlusProfileUrl ||
+        user.instagramProfileUrl ||
+        user.linkedInProfileUrl ||
+        user.twitterProfileUrl
+      "
+      class="pl-4 pr-4"
+    >
+      <h6>Social Links</h6>
+      <ul class="list-inline social-links">
+        <li *ngIf="user.facebookProfileUrl" class="list-inline-item">
+          <a
+            [href]="user.facebookProfileUrl"
+            target="_blank"
+            class="btn btn-sm btn-floating btn-facebook"
+          >
+            <i class="fa fa-facebook"></i>
+          </a>
+        </li>
+        <li *ngIf="user.twitterProfileUrl" class="list-inline-item">
+          <a
+            [href]="user.twitterProfileUrl"
+            target="_blank"
+            class="btn btn-sm btn-floating btn-twitter"
+          >
+            <i class="fa fa-twitter"></i>
+          </a>
+        </li>
+        <li *ngIf="user.dribbleProfileUrl" class="list-inline-item">
+          <a
+            [href]="user.dribbleProfileUrl"
+            target="_blank"
+            class="btn btn-sm btn-floating btn-dribbble"
+          >
+            <i class="fa fa-dribbble"></i>
+          </a>
+        </li>
+        <li *ngIf="user.linkedInProfileUrl" class="list-inline-item">
+          <a
+            [href]="user.linkedInProfileUrl"
+            target="_blank"
+            class="btn btn-sm btn-floating btn-linkedin"
+          >
+            <i class="fa fa-linkedin"></i>
+          </a>
+        </li>
+        <li *ngIf="user.googlePlusProfileUrl" class="list-inline-item">
+          <a
+            [href]="user.googlePlusProfileUrl"
+            target="_blank"
+            class="btn btn-sm btn-floating btn-google"
+          >
+            <i class="fa fa-google"></i>
+          </a>
+        </li>
+        <li *ngIf="user.instagramProfileUrl" class="list-inline-item">
+          <a
+            [href]="user.instagramProfileUrl"
+            target="_blank"
+            class="btn btn-sm btn-floating btn-instagram"
+          >
+            <i class="fa fa-instagram"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- <hr /><div class="pl-4 pr-4">
+      <div class="form-group">
+        <div class="form-item custom-control custom-switch">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="customSwitch11"
+          />
+          <label class="custom-control-label" for="customSwitch11">Block</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-item custom-control custom-switch">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            checked=""
+            id="customSwitch12"
+          />
+          <label class="custom-control-label" for="customSwitch12">Mute</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-item custom-control custom-switch">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="customSwitch13"
+          />
+          <label class="custom-control-label" for="customSwitch13"
+            >Get notification</label
+          >
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
